@@ -1,0 +1,105 @@
+:root {
+    --bg-color: #1a1a1a;
+    --card-color: #2a2a2a;
+    --border-color: #444;
+    --text-color: #f0f0f0;
+    --text-muted: #aaa;
+    --accent-color: #1db954; 
+}
+
+/* --- GENERAL --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: var(--accent-color);
+}
+
+/* --- Layout del Dashboard --- */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+/* --- Controles --- */
+.panel-controls label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-right: 10px;
+}
+
+.panel-controls select {
+    padding: 8px;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* --- KPIs --- */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.kpi-card {
+    background-color: var(--card-color);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.kpi-card h2 {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.kpi-card p {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* --- Grid de Gráficas --- */
+.chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 400px 400px; 
+    gap: 20px;
+}
+
+.chart-container {
+    background-color: var(--card-color);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    overflow: hidden; 
+}
+
