@@ -33,9 +33,10 @@ function updateDashboard(year) {
 
         updateKPIs(data);
 
-        // 👉 Aquí solo llamas a las gráficas que sí tienes
-        drawBarChart(data, "#bar-chart-container");
-        
+        const topN = parseInt(document.getElementById("bar-topn-input")?.value || "10", 10);
+        // Dibujar gráfica 1 con N
+        drawBarChart(currentYearData, "#bar-chart-container", topN);
+            
 
     }).catch(error => {
         console.error("Error al cargar los datos:", error);
@@ -56,6 +57,7 @@ function updateKPIs(data) {
 Carga inicial
  */
 document.addEventListener("DOMContentLoaded", function() {
+    const topNInput = document.getElementById("bar-topn-input");
 
     d3.select("#age-filter-checkbox").on("change", () => {
         drawScatterPlot(currentYearData, "#scatter-plot-container"); 
@@ -65,6 +67,13 @@ document.addEventListener("DOMContentLoaded", function() {
     selector.on("change", (event) => {
         const selectedYear = event.target.value;
         updateDashboard(selectedYear);
+    });
+
+    topNInput?.addEventListener("input", () => {
+        const topN = parseInt(topNInput.value || "10", 10);
+        if (currentYearData.length) {
+        drawBarChart(currentYearData, "#bar-chart-container", topN);
+        }
     });
 
     const initialYear = selector.property("value");

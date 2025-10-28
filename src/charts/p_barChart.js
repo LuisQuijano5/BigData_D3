@@ -1,4 +1,6 @@
-function drawBarChart(fullData, containerId){
+function drawBarChart(fullData, containerId, topN = 10){
+
+    topN = Number.isFinite(+topN) ? Math.max(1, Math.min(50, +topN)) : 10;
 
     const data = fullData.map(d => ({
         name : d.short_name,
@@ -6,16 +8,16 @@ function drawBarChart(fullData, containerId){
     }))
 
     data.sort((a, b) => d3.descending(a.overall, b.overall))
-    const top10 = data.slice(0,10)
+    const top = data.slice(0, topN)
 
-    //console.log(top10)
+    //console.log(top)
 
     //preparando el svg - margenes
 
     const container = d3.select(containerId)
     container.select("svg").remove()
 
-    const margin = {top: 20, right: 40, bottom: 40, left: 90}
+    const margin = {top: 20, right: 40, bottom: 40, left: 120}
     const chartBox = container.node().getBoundingClientRect()
     const width = chartBox.width - margin.left - margin.right
     const height = chartBox.height - margin.top - margin.bottom -40
@@ -23,17 +25,17 @@ function drawBarChart(fullData, containerId){
     const svg = container.append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
-        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.buttom}`)
+        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
         .append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     //Escalas
     const x = d3.scaleLinear()
-        .domain([0, d3.max(top10, d => d.overall)])
+        .domain([0, d3.max(top, d => d.overall)])
         .range([0, width]);
 
     const y = d3.scaleBand()
-        .domain(top10.map(d => d.name))
+        .domain(top.map(d => d.name))
         .range([0, height])
         .padding(0.2);
 
@@ -47,7 +49,7 @@ function drawBarChart(fullData, containerId){
     
     //Dibujar las barras
     svg.selectAll("rect")
-        .data(top10)
+        .data(top)
         .enter()
         .append("rect")
         .attr("y", d => y(d.name))
@@ -62,7 +64,7 @@ function drawBarChart(fullData, containerId){
 
     //Etiquetas en valores
     svg.selectAll("text.label")
-        .data(top10)
+        .data(top)
         .enter()
         .append("text")
         .attr("class", "label")
