@@ -78,7 +78,13 @@
                     <input type="checkbox" id="age-filter-checkbox" name="age-filter">
                     <label for="age-filter-checkbox">Mostrar solo menores de 25 años</label>
                 </div>
-                </div>
+            </div>
+
+            <div class="chart-container" id="bar-chart-container_p">
+                <h3>Gráfica 1</h3>
+                <label for="bar-topn-input">Top N:</label>
+                <input id="bar-topn-input" type="number" min="1" max="50" step="1" value="10" style="width:80px;">
+            </div>
 
         </main>
     </div>
@@ -87,6 +93,7 @@
     <script src="./src/charts/scatterPlot.js"></script>
     <script src="./src/charts/radarChart.js"></script>
     <script src="./src/charts/mapChart.js"></script>
+    <script src="./src/charts/p_barChart.js"></script>
 
     <script src="./src/utils/formatMoney.js"></script>
 

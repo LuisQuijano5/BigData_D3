@@ -93,6 +93,9 @@ function updateDashboard(year) {
         mapContainer.classed("is-loading", false);
         drawBarChart(data, "#bar-chart-container");
         drawScatterPlot(data, "#scatter-plot-container");
+        const topN = parseInt(document.getElementById("bar-topn-input")?.value || "10", 10);
+        // Dibujar gráfica 1 con N
+        drawBarChartP(currentYearData, "#bar-chart-container_p", topN);
         initRadarChart(data, "#radar-chart-container"); // ESTE PORQUE CREO QUE TIENE ERRORES AL FINAL si no hay jugadores entonces todo lo demas truena jaja
 
     }).catch(error => {
@@ -116,6 +119,8 @@ function updateKPIs(data) {
 Carga inicial
  */
 document.addEventListener("DOMContentLoaded", function() {
+    const topNInput = document.getElementById("bar-topn-input");
+    
 
     d3.select("#age-filter-checkbox").on("change", () => {
         drawScatterPlot(currentYearData, "#scatter-plot-container"); 
@@ -128,6 +133,13 @@ document.addEventListener("DOMContentLoaded", function() {
         //currentPlayerName = d3.select("#player-search").property("value");
         const selectedYear = event.target.value;
         updateDashboard(selectedYear);
+    });
+
+    topNInput?.addEventListener("input", () => {
+        const topN = parseInt(topNInput.value || "10", 10);
+        if (currentYearData.length) {
+        drawBarChartP(currentYearData, "#bar-chart-container_p", topN);
+        }
     });
 
     // 3. Carga inicial del dashboard (AHORA SÍ, DENTRO DEL LISTENER)
