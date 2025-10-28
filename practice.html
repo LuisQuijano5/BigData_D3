@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard FIFA - D3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/styles/style.css">
+    <link rel="stylesheet" href="./src/styles/d3_styles.css">
+    <link rel="stylesheet" href="./src/styles/radarChart_styles.css">
+    <link rel="stylesheet" href="./src/styles/mapChart_styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-container">
+
+    <header class="dashboard-header">
+        <h1>Dashboard de Análisis de Jugadores FIFA</h1>
+        
+        <div class="panel-controls">
+            <label for="year-select">Edición:</label>
+            <select id="year-select">
+                <option value="16">FIFA 16</option>
+                <option value="21">FIFA 21</option>
+            </select>
+
+            <label for="player-search">Buscar Jugador:</label>
+            <input type="text" id="player-search" list="player-list" placeholder="Escribe un nombre...">
+            <datalist id="player-list">
+                </datalist>
+        </div>
+    </header>
+
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <h2>Total de Jugadores</h2>
+                <p id="kpi-total-players">--</p>
+            </div>
+            <div class="kpi-card">
+                <h2>Overall Promedio</h2>
+                <p id="kpi-avg-overall">--</p>
+            </div>
+            <div class="kpi-card">
+                <h2>Valor Total del Mercado</h2>
+                <p id="kpi-total-value">--</p>
+            </div>
+            <div class="kpi-card">
+                <h2>Edad Promedio</h2>
+                <p id="kpi-avg-age">--</p>
+            </div>
+        </section>
+
+        <main class="chart-grid">
+
+            <div class="chart-container" id="bar-chart-container">
+                <h3>Gráfica 1</h3>
+            </div>
+
+            <div class="chart-container" id="radar-chart-container">
+                <h3>Gráfica 2</h3>
+            </div>
+
+            <div class="chart-container" id="map-container">
+                <h3>Gráfica 3</h3>
+            </div>
+
+            <div class="chart-container" id="scatter-plot-container">
+                <h3>Gráfica 4</h3>
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="./src/charts/p_barChart.js"></script>
+    <script src="./src/utils/formatMoney.js"></script>
+
+    <script src="./src/main_p.js"></script>
+</body>
+</html>
