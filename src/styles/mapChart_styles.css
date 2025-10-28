@@ -1,0 +1,26 @@
+.loading-spinner {
+    display: none; 
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--border-color);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px; 
+    margin-left: -25px; 
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.chart-container.is-loading .loading-spinner {
+    display: block;
+}
+
+.chart-container.is-loading svg {
+    opacity: 0.3;
+}

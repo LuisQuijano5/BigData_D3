@@ -61,6 +61,49 @@ h1 {
     font-size: 1rem;
 }
 
+.panel-controls label[for="player-search"] {
+    margin-left: 20px;
+}
+
+.panel-controls input[type="text"] {
+    padding: 8px;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 200px; /* Ajusta el ancho si quieres */
+}
+
+/* style.css (Añadir al final) */
+
+.chart-filter {
+    /* position: absolute;
+    top: 20px;
+    right: 20px; */
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.chart-filter input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 3px;
+    background-color: var(--bg-color);
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+    top: -1px;
+}
+
+.chart-filter input[type="checkbox"]:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
 /* --- KPIs --- */
 .kpi-grid {
     display: grid;

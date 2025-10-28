@@ -3,14 +3,22 @@ Este archivo es como el controlador, llama las graficas, limpia datos, gestiona 
 Según yo no deberian de necesitar modificarlo, yo me encargaria de explicarlo
  */
 
-function updateDashboard(year) {
-    const filename = `data/fifa_20${year}.csv`;
+//let currentPlayerName = null;
+let currentYearData = [];
 
-    // Cargar los datos del CSV
-    d3.csv(filename).then(data => {
+function updateDashboard(year) {
+    const dataFilename = `data/fifa_20${year}.csv`;
+    const mapFilename = "data/countries-110m.json"; 
+
+    const mapContainer = d3.select("#map-container");
+    mapContainer.classed("is-loading", true);
+
+    Promise.all([
+        d3.csv(dataFilename),
+        d3.json(mapFilename) 
+    ]).then(([data, topoData]) => {
         
         // Limpieza de datos 
-        // d3.csv a num (los que ocupen, las que son texto asi se quedan)
         data.forEach(d => {
             d.age = +d.age;
             d.height_cm = +d.height_cm;
@@ -71,19 +79,25 @@ function updateDashboard(year) {
             d.goalkeeping_reflexes = +d.goalkeeping_reflexes;
         });
 
-        console.log(`Datos cargados para FIFA ${year}:`, data);
+        currentYearData = data;
+        const geoData = topojson.feature(topoData, topoData.objects.countries);
+        const ukFeature = geoData.features.find(f => f.properties.name === "United Kingdom");
+        if (ukFeature) {
+            ukFeature.properties.name = "England";
+        }
 
-        // Actualizar los KPIs
         updateKPIs(data);
-        
-        // Aquuí pongan las llamadas a las demas gráficas
+
+        // Aqui llamen a sus graficas
+        drawMapChart(data, "#map-container", geoData);
+        mapContainer.classed("is-loading", false);
         drawBarChart(data, "#bar-chart-container");
-        // drawScatterPlot(data, "#scatter-plot-container");
-        // drawRadarChart(data, "#radar-chart-container");
-        // drawMapChart(data, "#map-container");
+        drawScatterPlot(data, "#scatter-plot-container");
+        initRadarChart(data, "#radar-chart-container"); // ESTE PORQUE CREO QUE TIENE ERRORES AL FINAL si no hay jugadores entonces todo lo demas truena jaja
 
     }).catch(error => {
-        console.error("Error al cargar o procesar los datos:", error);
+        console.error("Error al cargar los datos o el mapa:", error);
+        mapContainer.classed("is-loading", false);
     });
 }
 
@@ -101,13 +115,23 @@ function updateKPIs(data) {
 /**
 Carga inicial
  */
+document.addEventListener("DOMContentLoaded", function() {
 
-const selector = d3.select("#year-select");
+    d3.select("#age-filter-checkbox").on("change", () => {
+        drawScatterPlot(currentYearData, "#scatter-plot-container"); 
+    });
+    
+    // 2. Configurar el "listener" para el selector de año
+    const selector = d3.select("#year-select");
 
-selector.on("change", (event) => {
-    const selectedYear = event.target.value;
-    updateDashboard(selectedYear);
+    selector.on("change", (event) => {
+        //currentPlayerName = d3.select("#player-search").property("value");
+        const selectedYear = event.target.value;
+        updateDashboard(selectedYear);
+    });
+
+    // 3. Carga inicial del dashboard (AHORA SÍ, DENTRO DEL LISTENER)
+    const initialYear = selector.property("value");
+    updateDashboard(initialYear);
+
 });
-
-const initialYear = selector.property("value");
-updateDashboard(initialYear);
