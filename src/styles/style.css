@@ -72,37 +72,9 @@ h1 {
     border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 1rem;
-    width: 200px; /* Ajusta el ancho si quieres */
+    width: 200px; 
 }
 
-/* style.css (Añadir al final) */
-
-.chart-filter {
-    /* position: absolute;
-    top: 20px;
-    right: 20px; */
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.chart-filter input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--border-color);
-    border-radius: 3px;
-    background-color: var(--bg-color);
-    vertical-align: middle;
-    cursor: pointer;
-    position: relative;
-    top: -1px;
-}
-
-.chart-filter input[type="checkbox"]:checked {
-    background-color: var(--accent-color);
-    border-color: var(--accent-color);
-}
 
 /* --- KPIs --- */
 .kpi-grid {
@@ -134,7 +106,7 @@ h1 {
 .chart-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; 
-    grid-template-rows: 400px 400px; 
+    grid-template-rows: 400px 400px 400px; 
     gap: 20px;
 }
 

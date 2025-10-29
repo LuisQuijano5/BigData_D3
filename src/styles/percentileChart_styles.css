@@ -1,0 +1,24 @@
+.percentile-line {
+    stroke: var(--border-color);
+    stroke-width: 1px;
+}
+
+.percentile-dot {
+    stroke: var(--accent-color);
+    fill: var(--accent-color);
+    stroke-width: 2px;
+}
+
+.percentile-label {
+    fill: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.chart-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: -10px; 
+    margin-bottom: 10px;
+}

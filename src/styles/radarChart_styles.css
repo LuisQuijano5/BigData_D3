@@ -2,23 +2,33 @@
     position: relative;
 }
 
-.radar-overall-display {
+.radar-stats-display {
     position: absolute;
-    top: 20px; 
+    top: 20px;
     right: 20px;
+    display: flex; 
+    gap: 20px; 
+}
+
+.radar-stats-display .stat-card {
     text-align: right;
 }
 
-.radar-overall-display span {
+.radar-stats-display .stat-card span {
     font-size: 2.5rem;
+    justify-content: center;
+    text-align: center;
     font-weight: 700;
     color: var(--accent-color);
     display: block;
     line-height: 1; 
 }
 
-.radar-overall-display label {
+.radar-stats-display .stat-card label {
     font-size: 1rem;
     color: var(--text-muted);
     font-weight: 400;
+    justify-content: center;
+    text-align: center;
+    min-width: 100%;
 }

@@ -3,7 +3,7 @@ Este archivo es como el controlador, llama las graficas, limpia datos, gestiona 
 Según yo no deberian de necesitar modificarlo, yo me encargaria de explicarlo
  */
 
-//let currentPlayerName = null;
+let currentPlayerName = null;
 let currentYearData = [];
 
 function updateDashboard(year) {
@@ -93,7 +93,10 @@ function updateDashboard(year) {
         mapContainer.classed("is-loading", false);
         drawBarChart(data, "#bar-chart-container");
         drawScatterPlot(data, "#scatter-plot-container");
-        initRadarChart(data, "#radar-chart-container"); // ESTE PORQUE CREO QUE TIENE ERRORES AL FINAL si no hay jugadores entonces todo lo demas truena jaja
+
+        // ESTOS PORQUE CREO QUE TIENEN ERRORES AL FINAL si no hay jugadores entonces todo lo demas truena jaja
+        drawPercentileChart(null, data, "#percentile-container");
+        initRadarChart(data, "#radar-chart-container"); 
 
     }).catch(error => {
         console.error("Error al cargar los datos o el mapa:", error);
@@ -118,6 +121,9 @@ Carga inicial
 document.addEventListener("DOMContentLoaded", function() {
 
     d3.select("#age-filter-checkbox").on("change", () => {
+        drawScatterPlot(currentYearData, "#scatter-plot-container"); 
+    });
+    d3.select("#scatter-filter-select").on("change", () => {
         drawScatterPlot(currentYearData, "#scatter-plot-container"); 
     });
     

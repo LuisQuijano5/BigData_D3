@@ -1,0 +1,41 @@
+.chart-filter {
+    display: flex;
+    align-items: center; 
+    gap: 8px; 
+    top: 20px;
+    right: 20px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.chart-filter label[for="scatter-filter-select"] {
+    margin-left: 15px;
+}
+
+.chart-filter input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 3px;
+    background-color: var(--bg-color);
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+    top: -1px;
+}
+
+.chart-filter input[type="checkbox"]:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.chart-filter select {
+    padding: 5px 8px;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 0.9rem;
+}

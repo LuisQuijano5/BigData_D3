@@ -8,6 +8,21 @@ function drawScatterPlot(fullData, containerId) {
         localFilteredData = fullData; 
     }
 
+    fullData.forEach(d => {
+        d.growth = d.potential - d.overall;
+    });
+
+    const filterType = d3.select("#scatter-filter-select").property("value");
+    if (filterType === 'growth') {
+        localFilteredData = localFilteredData
+            .sort((a, b) => d3.descending(a.growth, b.growth))
+            .slice(0, 100);
+    } else {
+        localFilteredData = localFilteredData
+            .sort((a, b) => d3.descending(a.potential, b.potential))
+            .slice(0, 100);
+    }
+
     // Seleccionar el contenedor y definir márgenes
     const container = d3.select(containerId);
     container.select("svg").remove(); // Limpiar
@@ -18,7 +33,7 @@ function drawScatterPlot(fullData, containerId) {
     const margin = { top: 10, right: 30, bottom: 40, left: 70 };
     const chartBox = container.node().getBoundingClientRect();
     const width = chartBox.width - margin.left - margin.right;
-    const height = chartBox.height - margin.top - margin.bottom - h3Height - filterHeight; 
+    const height = chartBox.height - margin.top - margin.bottom - h3Height - filterHeight - 60; 
 
     // Añadir el SVG
     const svg = container.append("svg")
@@ -42,7 +57,7 @@ function drawScatterPlot(fullData, containerId) {
         
     // Definir Escala de Color
     const color = d3.scaleOrdinal()
-        .domain(["Atacante", "Medio", "Defensa", "Portero"])
+        .domain(["At", "M", "Df", "Por"])
         .range(["#1db954", "#3498db", "#e74c3c", "#f1c40f"]);
 
     //  Dibujar Eje X
@@ -92,6 +107,7 @@ function drawScatterPlot(fullData, containerId) {
                 `<strong>${d.short_name}</strong> (${d.age} años)<br>` +
                 `Club: ${d.club_name}<br>` +
                 `Potencial: ${d.potential}<br>` +
+                `Media Actual: ${d.overall}<br>` +
                 `Valor: €${formatValue(d.value_eur)}` 
             )
             .style("left", (event.pageX + 15) + "px")

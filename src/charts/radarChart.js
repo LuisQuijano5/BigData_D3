@@ -57,6 +57,7 @@ function initRadarChart(fullData, containerId) {
 
     // Dibujar las etiquetas de los ejes 
     axes.append("text")
+        .attr("class", "axis-label")
         .attr("x", (d, i) => rScale(110) * Math.cos(angleSlice * i - Math.PI / 2))
         .attr("y", (d, i) => rScale(110) * Math.sin(angleSlice * i - Math.PI / 2))
         .text(d => d.toUpperCase())
@@ -100,6 +101,20 @@ function initRadarChart(fullData, containerId) {
     function updateRadar(player) {
         if (!player) return; // Si no hay jugador, no hacer nada
 
+        let axisLabels;
+        let statsToShow = ["pace", "shooting", "passing", "dribbling", "defending", "physic"]; // Default
+
+        if (player && player.Posicion_General === 'Por') {
+            axisLabels = ["SPEED", "DIVING", "HANDLING", "KICKING", "POSITIONING", "REFLEXES"]; 
+            // (REF=Reflexes, DIV=Diving, HAN=Handling, KIC=Kicking, POS=Positioning, PHY=Physic)
+        } else {
+            axisLabels = ["PACE", "SHOOTING", "PASSING", "DRIBBLING", "DEFENDING", "PHYSIC"];
+        }
+
+        svg.selectAll(".axis-label")
+            .data(axisLabels)
+            .text(d => d);
+
         // Calcular los 6 puntos (x, y) para este jugador
         const pathData = stats.map((stat, i) => {
             const value = player[stat];
@@ -116,6 +131,7 @@ function initRadarChart(fullData, containerId) {
             .attr("d", radarLine);
         
         d3.select("#player-overall").text(player.overall);
+        d3.select("#player-position").text(player.Posicion_General);
     }
 
     // Poblar el <datalist> y Configurar el Evento 
@@ -134,8 +150,11 @@ function initRadarChart(fullData, containerId) {
         if (player) {
             updateRadar(player);
             currentPlayerName = player.short_name; 
+            drawPercentileChart(player, fullData, "#percentile-container");
         } else {
+            drawPercentileChart(null, fullData, "#percentile-container");
             d3.select("#player-overall").text('--');
+            d3.select("#player-position").text('--');
             playerPath
                 .datum([]) 
                 .transition()
@@ -148,26 +167,19 @@ function initRadarChart(fullData, containerId) {
     let playerToDisplay = null;
 
     if (fullData && fullData.length > 0) {
-        
         if (currentPlayerName) {
             playerToDisplay = fullData.find(d => d.short_name === currentPlayerName);
         }
 
-        if (!playerToDisplay) {
-            playerToDisplay = fullData.find(d => d.short_name === "L. Messi");
-        }
-        
-        if (!playerToDisplay) {
-            playerToDisplay = fullData[0]; 
-        }
-
-        currentPlayerName = playerToDisplay.short_name;
+        currentPlayerName = playerToDisplay ? playerToDisplay.short_name : null;
         d3.select("#player-search").property("value", currentPlayerName);
         updateRadar(playerToDisplay);
+        drawPercentileChart(playerToDisplay, fullData, "#percentile-container");
 
     } else {
         currentPlayerName = null;
         d3.select("#player-search").property("value", "");
         updateRadar(null);
+        drawPercentileChart(null, fullData, "#percentile-container");
     }
 }

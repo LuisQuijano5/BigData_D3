@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./src/styles/d3_styles.css">
     <link rel="stylesheet" href="./src/styles/radarChart_styles.css">
     <link rel="stylesheet" href="./src/styles/mapChart_styles.css">
+    <link rel="stylesheet" href="./src/styles/scatterChart_styles.css">
+    <link rel="stylesheet" href="./src/styles/percentileChart_styles.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v3.min.js"></script>
 </head>
@@ -56,20 +58,29 @@
 
             <div class="chart-container" id="radar-chart-container">
                 <h3>Perfil de Jugador (Radar)</h3>
-                <div class="radar-overall-display">
-                    <span id="player-overall">--</span>
-                    <label>OVERALL</label>
+                <div class="radar-stats-display">
+                    <div class="stat-card">
+                        <span id="player-overall">--</span>
+                        <label>OVERALL</label>
+                    </div>
+                    <div class="stat-card">
+                        <span id="player-position">--</span>
+                        <label>POSICIÓN</label>
+                    </div>
                 </div>
-                </div>
+            </div>
 
             <div class="chart-container" id="map-container">
                 <h3>Talento por Nacionalidad</h3>
                 <div class="loading-spinner"></div>
-                </div>
-
-            <div class="chart-container" id="bar-chart-container">
-                <h3>Ritmo Promedio por Posición</h3>
-                </div>
+            </div>
+            
+            <div class="chart-container" id="percentile-container">
+                <h3>Ranking Percentil</h3>
+                <h4 class="chart-subtitle" id="percentile-league-name">
+                    (vs. Liga: --)
+                </h4>
+            </div>
 
             <div class="chart-container" id="scatter-plot-container">
                 <h3>Potencial vs. Valor de Mercado</h3>
@@ -77,8 +88,18 @@
                 <div class="chart-filter">
                     <input type="checkbox" id="age-filter-checkbox" name="age-filter">
                     <label for="age-filter-checkbox">Mostrar solo menores de 25 años</label>
+
+                    <label for="scatter-filter-select">Mostrar Top 100 por:</label>
+                    <select id="scatter-filter-select">
+                        <option value="potential" selected>Mejor Potencial</option>
+                        <option value="growth">Mayor Crecimiento</option>
+                    </select>
                 </div>
-                </div>
+            </div>
+            
+            <div class="chart-container" id="bar-chart-container">
+                <h3>Ritmo Promedio por Posición</h3>
+            </div>
 
         </main>
     </div>
@@ -87,6 +108,7 @@
     <script src="./src/charts/scatterPlot.js"></script>
     <script src="./src/charts/radarChart.js"></script>
     <script src="./src/charts/mapChart.js"></script>
+    <script src="./src/charts/percentileChart.js"></script>
 
     <script src="./src/utils/formatMoney.js"></script>
 
