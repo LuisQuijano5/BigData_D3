@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./src/styles/mapChart_styles.css">
     <link rel="stylesheet" href="./src/styles/scatterChart_styles.css">
     <link rel="stylesheet" href="./src/styles/percentileChart_styles.css">
+    <link rel="stylesheet" href="./src/styles/p_barChart_styles.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v3.min.js"></script>
 </head>
@@ -101,6 +102,12 @@
                 <h3>Ritmo Promedio por Posición</h3>
             </div>
 
+            <div class="chart-container" id="bar-chart-container_p">
+                <h3>Top N Jugadores</h3>
+                <label for="bar-topn-input">Top N:</label>
+                <input id="bar-topn-input" type="number" min="1" max="50" step="1" value="10" style="width:80px;">
+            </div>
+
         </main>
     </div>
 
@@ -109,6 +116,7 @@
     <script src="./src/charts/radarChart.js"></script>
     <script src="./src/charts/mapChart.js"></script>
     <script src="./src/charts/percentileChart.js"></script>
+    <script src="./src/charts/p_barChart.js"></script>
 
     <script src="./src/utils/formatMoney.js"></script>
 

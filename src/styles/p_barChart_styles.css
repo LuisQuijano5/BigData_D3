@@ -1,0 +1,17 @@
+#bar-chart-container_p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+#bar-chart-container_p label[for="bar-topn-input"] {
+    margin-left: 15px;
+}
+
+#bar-chart-container_p input {
+    padding: 5px 8px;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
