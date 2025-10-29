@@ -85,6 +85,10 @@ function updateDashboard(year) {
         if (ukFeature) {
             ukFeature.properties.name = "England";
         }
+        const usFeature = geoData.features.find(f => f.properties.name === "United States of America");
+        if (usFeature) {
+            usFeature.properties.name = "United States";
+        }
 
         updateKPIs(data);
 
