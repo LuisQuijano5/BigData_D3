@@ -36,6 +36,10 @@ function updateDashboard(year) {
         const topN = parseInt(document.getElementById("bar-topn-input")?.value || "10", 10);
         // Dibujar gráfica 1 con N
         drawBarChart(currentYearData, "#bar-chart-container", topN);
+        
+        // Aquí llamamos a la función 'dibujarPieChart' (de pieChart.js)
+        // y le pasamos los mismos datos ('data') y el ID de tu contenedor.
+        dibujarPieChart(data, "#demo-pastel-jp");
             
 
     }).catch(error => {
