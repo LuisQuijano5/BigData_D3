@@ -1,5 +1,5 @@
 function drawMapChart(fullData, containerId, mapGeoData) {
-    // --- 1. Procesar los Datos de FIFA ---
+    // --- Procesar los Datos de FIFA ---
     const overallByCountry = d3.rollup(
         fullData,
         v => ({
@@ -11,9 +11,9 @@ function drawMapChart(fullData, containerId, mapGeoData) {
         d => d.nationality 
     );
 
-    // --- 2. Configuración del Mapa y SVG ---
+    // --- Configuración del Mapa y SVG ---
     const container = d3.select(containerId);
-    container.select("svg").remove(); // Limpiar
+    container.select("svg").remove(); 
 
     const chartBox = container.node().getBoundingClientRect();
     const h3Height = container.select("h3").node().getBoundingClientRect().height + 10;
@@ -25,11 +25,10 @@ function drawMapChart(fullData, containerId, mapGeoData) {
         .attr("width", "100%")
         .attr("height", height);
 
-    // --- 3. Definir la Proyección del Mapa ---
-    // La proyección convierte coordenadas (lat, lon) en píxeles (x, y)
+    // --- Definir la Proyección del Mapa ---
     const padding = 10;
     const projection = d3.geoMercator()
-        .scale(130) // Un "zoom" inicial
+        .scale(130) 
         .center([0, 40]) 
         .translate([width / 2, height / 2]) 
         .fitExtent(
@@ -39,7 +38,7 @@ function drawMapChart(fullData, containerId, mapGeoData) {
 
     const pathGenerator = d3.geoPath().projection(projection);
 
-    // --- 4. Definir la Escala de Color ---
+    // --- Definir la Escala de Color ---
     const colorScale = d3.scaleQuantize()
         .domain([60, 85]) 
         .range([
@@ -51,14 +50,14 @@ function drawMapChart(fullData, containerId, mapGeoData) {
             "#00796b"  
         ]);
 
-    // --- 5. Unir Datos de FIFA con el GeoJSON ---
+    // --- Unir Datos de FIFA con el GeoJSON ---
     mapGeoData.features.forEach(feature => {
         const countryName = feature.properties.name;
         const overall = overallByCountry.get(countryName);
         feature.properties.avgOverall = overall || 0; 
     });
 
-    // --- 6. Tooltip ---
+    // --- Tooltip ---
     const tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("position", "absolute")
@@ -69,7 +68,7 @@ function drawMapChart(fullData, containerId, mapGeoData) {
         .style("pointer-events", "none")
         .style("opacity", 0);
 
-    // --- 7. Dibujar los Países ---
+    // --- Dibujar los Países ---
     svg.selectAll("path")
         .data(mapGeoData.features)
         .enter()

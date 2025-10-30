@@ -9,7 +9,7 @@ function initRadarChart(fullData, containerId) {
     
     const margin = { top: 50, right: 70, bottom: 50, left: 70 };
 
-    // Ancho y alto REALES para el SVG (
+    // Ancho y alto para el SVG 
     const svgWidth = chartBox.width;
     const svgHeight = chartBox.height - h3Height;
 
@@ -17,15 +17,13 @@ function initRadarChart(fullData, containerId) {
     const centerX = svgWidth / 2;
     const centerY = svgHeight / 2;
 
-    // El radio es la mitad de la dimensión más pequeña, menos los márgenes
     const radius = Math.min(
         svgWidth - margin.left - margin.right, 
         svgHeight - margin.top - margin.bottom
     ) / 2;
 
-    // Las 6 stats que usaremos
     const stats = ["pace", "shooting", "passing", "dribbling", "defending", "physic"];
-    const levels = 4; // Número de círculos (25, 50, 75, 100)
+    const levels = 4; 
     const angleSlice = (Math.PI * 2) / stats.length; 
 
     // Escala Radial 
@@ -67,7 +65,7 @@ function initRadarChart(fullData, containerId) {
 
     // Dibujar los polígonos de niveles (25, 50, 75, 100)
     for (let i = 0; i < levels; i++) {
-        const level = (i + 1) * (100 / levels); // 25, 50, 75, 100
+        const level = (i + 1) * (100 / levels); 
         const levelData = stats.map((d, j) => {
             const x = rScale(level) * Math.cos(angleSlice * j - Math.PI / 2);
             const y = rScale(level) * Math.sin(angleSlice * j - Math.PI / 2);
@@ -83,7 +81,7 @@ function initRadarChart(fullData, containerId) {
     }
 
     // --- Crear el Polígono del Jugador  ---
-    // Usamos 'd3.line()' para dibujar el polígono
+    // dibujar el polígono
     const radarLine = d3.line()
         .x(d => d.x)
         .y(d => d.y)
@@ -99,10 +97,10 @@ function initRadarChart(fullData, containerId) {
 
     // --- Lógica de Actualización  ---
     function updateRadar(player) {
-        if (!player) return; // Si no hay jugador, no hacer nada
+        if (!player) return;
 
         let axisLabels;
-        let statsToShow = ["pace", "shooting", "passing", "dribbling", "defending", "physic"]; // Default
+        let statsToShow = ["pace", "shooting", "passing", "dribbling", "defending", "physic"]; 
 
         if (player && player.Posicion_General === 'Por') {
             axisLabels = ["SPEED", "DIVING", "HANDLING", "KICKING", "POSITIONING", "REFLEXES"]; 

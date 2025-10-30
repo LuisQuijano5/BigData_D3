@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
         drawScatterPlot(currentYearData, "#scatter-plot-container"); 
     });
     
-    // 2. Configurar el "listener" para el selector de año
+    // Configurar el "listener" para el selector de año
     const selector = d3.select("#year-select");
 
     selector.on("change", (event) => {
@@ -149,11 +149,11 @@ document.addEventListener("DOMContentLoaded", function() {
     topNInput?.addEventListener("input", () => {
         const topN = parseInt(topNInput.value || "10", 10);
         if (currentYearData.length) {
-        drawBarChartP(currentYearData, "#bar-chart-container_p", topN);
+            drawBarChartP(currentYearData, "#bar-chart-container_p", topN);
         }
     });
 
-    // 3. Carga inicial del dashboard (AHORA SÍ, DENTRO DEL LISTENER)
+    // Carga inicial del dashboard 
     const initialYear = selector.property("value");
     updateDashboard(initialYear);
 

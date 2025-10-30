@@ -23,7 +23,7 @@ function drawPercentileChart(selectedPlayer, fullData, containerId) {
     const percentileData = stats.map(stat => {
         const value = selectedPlayer[stat]; 
         
-        // Obtener la lista de TODAS las stats de esa liga
+        // Obtener la lista de las stats de esa liga
         const allStatValues = leagueData.map(d => d[stat]);
 
         // Contar cuántos jugadores en la liga son PEORES que el jugador
@@ -34,7 +34,6 @@ function drawPercentileChart(selectedPlayer, fullData, containerId) {
             }
         });
         
-        // Calcular percentil  (150 jugadores peores / 160 total) * 100
         const percentile = (betterThanCount / totalPlayersInLeague) * 100;
 
         return { 
