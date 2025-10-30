@@ -1,8 +1,3 @@
-// src/charts/pieChart.js
-// Autor: Juan Pablo Ramírez Ruiz
-// Archivo para la demostración en la rama 'practice'.
-// Este archivo SÓLO define la función. El "cerebro" (main_p.js) la llamará.
-
 /**
  * ===================================================================================
  * BLOQUE 1: DEFINICIÓN DE LA FUNCIÓN Y PREPARACIÓN DE DATOS
@@ -183,3 +178,4 @@ function dibujarPieChart(data, container_id) {
         });
 
 } // <-- Fin de la función dibujarPieChart
+
