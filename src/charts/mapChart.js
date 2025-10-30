@@ -75,7 +75,7 @@ function drawMapChart(fullData, containerId, mapGeoData) {
         .append("path")
         .attr("d", pathGenerator) 
         .attr("fill", d => {
-            const countryName = d.properties.ADMIN; 
+            const countryName = d.properties.name; 
             
             const stats = overallByCountry.get(countryName);
             

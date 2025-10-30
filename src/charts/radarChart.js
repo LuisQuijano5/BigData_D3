@@ -87,7 +87,6 @@ function initRadarChart(fullData, containerId) {
         .y(d => d.y)
         .curve(d3.curveLinearClosed); 
 
-    // Creamos el <path> que se actualizará
     const playerPath = svg.append("path")
         .attr("class", "radar-path")
         .style("fill", "var(--accent-color)")
@@ -113,7 +112,7 @@ function initRadarChart(fullData, containerId) {
             .data(axisLabels)
             .text(d => d);
 
-        // Calcular los 6 puntos (x, y) para este jugador
+        // Calcular los 6 puntos (x, y) 
         const pathData = stats.map((stat, i) => {
             const value = player[stat];
             const x = rScale(value) * Math.cos(angleSlice * i - Math.PI / 2);
