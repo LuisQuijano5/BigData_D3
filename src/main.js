@@ -97,6 +97,7 @@ function updateDashboard(year) {
         mapContainer.classed("is-loading", false);
         drawBarChart(data, "#bar-chart-container");
         drawScatterPlot(data, "#scatter-plot-container");
+        dibujarPieChart(data, "#piechart-container")
 
         const topN = parseInt(document.getElementById("bar-topn-input")?.value || "10", 10);
         // Dibujar gráfica 1 con N

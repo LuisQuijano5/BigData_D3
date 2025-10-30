@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard FIFA - D3</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
     <div class="dashboard-container">
 
     <header class="dashboard-header">
-<h1>Dashboard de Análisis de Jugadores FIFA</h1>
+        <h1>Dashboard de Análisis de Jugadores FIFA</h1>
         
         <div class="panel-controls">
             <label for="year-select">Edición:</label>
@@ -32,12 +32,12 @@
             <label for="player-search">Buscar Jugador:</label>
             <input type="text" id="player-search" list="player-list" placeholder="Escribe un nombre...">
             <datalist id="player-list">
-            </datalist>
+                </datalist>
         </div>
     </header>
 
         <section class="kpi-grid">
-<div class="kpi-card">
+            <div class="kpi-card">
                 <h2>Total de Jugadores</h2>
                 <p id="kpi-total-players">--</p>
             </div>
@@ -57,7 +57,7 @@
 
         <main class="chart-grid">
 
-<div class="chart-container" id="radar-chart-container">
+            <div class="chart-container" id="radar-chart-container">
                 <h3>Perfil de Jugador (Radar)</h3>
                 <div class="radar-stats-display">
                     <div class="stat-card">
@@ -111,13 +111,19 @@
             <div class="chart-container" id="piechart-container">
                 <h3>Distribución por Nacionalidad</h3>
             </div>
+
+        </main>
+    </div>
+
+    <script src="./src/charts/barChart.js"></script>
     <script src="./src/charts/scatterPlot.js"></script>
     <script src="./src/charts/radarChart.js"></script>
     <script src="./src/charts/mapChart.js"></script>
     <script src="./src/charts/percentileChart.js"></script>
     <script src="./src/charts/p_barChart.js"></script>
+    <script src="./src/charts/piechart_juanpablo.js"></script>
 
-    <script src="./src/charts/piechart_juanpablo.js"></script> <script src="./src/utils/formatMoney.js"></script>
+    <script src="./src/utils/formatMoney.js"></script>
 
     <script src="./src/main.js"></script>
 </body>
